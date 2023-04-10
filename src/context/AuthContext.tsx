@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: Props) => {
     // Firebase method that adds an observer for changes to the user's sign-in state
     const userStateListener = (callback:NextOrObserver<User>) => {
         return onAuthStateChanged(auth, callback);
-    }
+    };
   
     const SignOutUser = async () => {
         try {
@@ -46,7 +46,8 @@ export const AuthProvider = ({ children }: Props) => {
         } 
         catch (err) {
             console.error(err);
-    }
+        }
+    };
 
     // Listen for changes in user authentication state
     useEffect(() => {
@@ -67,7 +68,7 @@ export const AuthProvider = ({ children }: Props) => {
         // Set the current user state to null after sign out
         setCurrentUser(null);
         // Redirect user to login page
-        navigate('/login');
+        navigate('/');
     }
 
     // Define the context value that will be passed down to child components
