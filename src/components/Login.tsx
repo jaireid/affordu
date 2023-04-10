@@ -12,9 +12,9 @@ export default function Login() {
         try {
             // Sign in with Google and get user credentials
             const userCredential = await signInWithGoogle();
-            // Navigate to the home page if user credentials are returned
+            // Navigate to the profile page if user credentials are returned
             if(userCredential) {
-                navigate('/home');
+                navigate("/profile");
             }
         } catch (error:any) {
             console.log(error.message);
