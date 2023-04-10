@@ -1,4 +1,4 @@
-// Import the functions from SDKs
+// Import functions from SDKs
 import { getFirebaseConfig } from "./firebase-config";
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
