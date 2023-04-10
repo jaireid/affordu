@@ -1,13 +1,7 @@
+import { User } from "firebase/auth";
 import { createContext, useState, useEffect, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth, googleProvider } from "../utils/firebase";
-import {
-    User,
-    signInWithPopup,
-    onAuthStateChanged,
-    signOut,
-    NextOrObserver
-} from "firebase/auth";
+import { SignOutUser, userStateListener } from "../utils/firebase";
 
 // Define the expected props for the AuthProvider component
 interface Props {
@@ -25,29 +19,6 @@ export const AuthContext = createContext({
 export const AuthProvider = ({ children }: Props) => {
     const [currentUser, setCurrentUser] = useState<User | null>(null);  // Declare state for the authenticated user and initialize it to null
     const navigate = useNavigate();
-  
-    const signInWithGoogle = async () => {
-        try {
-            await signInWithPopup(auth, googleProvider);
-        } 
-        catch (err) {
-            console.error(err);
-        }
-    };
-
-    // Firebase method that adds an observer for changes to the user's sign-in state
-    const userStateListener = (callback:NextOrObserver<User>) => {
-        return onAuthStateChanged(auth, callback);
-    };
-  
-    const SignOutUser = async () => {
-        try {
-            await signOut(auth);
-        } 
-        catch (err) {
-            console.error(err);
-        }
-    };
 
     // Listen for changes in user authentication state
     useEffect(() => {
