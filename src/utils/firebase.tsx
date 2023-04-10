@@ -21,7 +21,7 @@ export const storage = getStorage(app);
 
  export const signInWithGoogle = async () => {
         try {
-            await signInWithPopup(auth, googleProvider);
+            return await signInWithPopup(auth, googleProvider);
         } 
         catch (err) {
             console.error(err);
