@@ -22,7 +22,7 @@ export default function Login() {
   	};
 
     return (
-        <div>
+        <>
             <h2>Join AffordU Today</h2>
             <div>
                 <h3>Sign in with one of our providers</h3>
@@ -30,6 +30,6 @@ export default function Login() {
                     <FcGoogle /> Sign in with Google
                 </button>
             </div>
-      </div>
+      </>
     );
 };
