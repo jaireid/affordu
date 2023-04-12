@@ -10,7 +10,7 @@ export default function App() {
     const { currentUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    // Check if currentUser exists on initial render
+    // Check if current user exists on initial render
     useEffect(() => {
         if (currentUser) {
             navigate("/profile");
