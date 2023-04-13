@@ -31,7 +31,7 @@ export const fetchColleges = async () => {
         const response = await axios.get(API_BASE_URL, { params: queryParams });
         const data = response.data;
         // Map the returned data to an array
-        const colleges = data.results.map((result: any) => ({
+        const colleges = data.results.map((result: any): College => ({
             id: result.id,
             name: result["school.name"],
             state: result["school.state"],
