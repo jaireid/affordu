@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate, Routes, Route } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 import { AppShell, Header, Navbar, Text } from '@mantine/core';
