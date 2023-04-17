@@ -2,6 +2,7 @@ import { MouseEvent } from "react";
 import { signInWithGoogle } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import { Flex, Title, Text, Button, rem } from '@mantine/core';
 
 export default function Login() {
     const navigate = useNavigate();
@@ -22,14 +23,25 @@ export default function Login() {
   	};
 
     return (
-        <>
-            <h2>Join AffordU Today</h2>
-            <div>
-                <h3>Sign in with one of our providers</h3>
-                <button onClick={handleGoogleLogin}>
-                    <FcGoogle /> Sign in with Google
-                </button>
-            </div>
-      </>
+        <Flex
+            gap="md"
+            justify="center"
+            align="center"
+            direction="column"
+            wrap="wrap"
+            h="70%"
+        >
+            <Title order={1} size="3rem" ta="center">
+                Join{' '}
+                <Text component="span" variant="gradient" gradient={{ from: 'blue', to: 'cyan' }} inherit>
+                AffordU
+                </Text>{' '}
+                Today
+            </Title>
+            <Text color="dimmed" fz="lg" ta="center">Search and compare the net prices of colleges, and discover affordable options that meet your academic and financial goals.</Text>
+            <Button variant="outline" fz="lg" leftIcon={<FcGoogle />} onClick={handleGoogleLogin}>
+                Sign in with Google
+            </Button>
+        </Flex>
     );
 };

@@ -87,7 +87,7 @@ export default function Navi() {
   return (
       <>
         {currentUser ? (
-          <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
+          <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 300, lg: 350 }}>
               <Navbar.Section grow mt="md">
                   <Text weight={500} size="lg" color="dimmed" mb="xs" align="center">
                       Welcome, {currentUser?.displayName}!
