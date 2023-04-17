@@ -5,6 +5,7 @@ type College = {
   name: string;
   state: string;
   city: string;
+  admissionRate: number;
   studentSize: number;
   costAttendance: string;
   netPrice: number;
@@ -20,7 +21,7 @@ const API_KEY = process.env.VITE_COLLEGE_API_KEY;
 const API_BASE_URL = `https://api.data.gov/ed/collegescorecard/v1/schools.json?api_key=${API_KEY}`;
 
 const queryParams = new URLSearchParams({
-    _fields: "id,school.name,school.state,school.city,latest.student.size,latest.cost.attendance.academic_year,latest.cost.avg_net_price.overall,latest.aid.pell_grant_rate,latest.aid.federal_loan_rate,latest.aid.median_debt_suppressed.overall,latest.school.school_url,latest.school.price_calculator_url",
+    _fields: "id,school.name,school.state,school.city,latest.admissions.admission_rate.overall,latest.student.size,latest.cost.attendance.academic_year,latest.cost.avg_net_price.overall,latest.aid.pell_grant_rate,latest.aid.federal_loan_rate,latest.aid.median_debt_suppressed.overall,latest.school.school_url,latest.school.price_calculator_url",
     per_page: "20",
 });
       

@@ -22,10 +22,15 @@ export default function App() {
         <AppShell
             padding="md"
             navbar={<Navi />}
-            header={<Header height={50} fw={500} p="xs">{<Text fz="xl" color="blue" pl="sm">AffordU</Text>}</Header>}
+            header={
+                <Header height={50} fw={500} p="xs">
+                    {<Text fz="xl" color="blue" pl="sm">AffordU</Text>}
+                </Header>
+            }
             styles={(theme) => ({ 
                 main: { 
-                    backgroundColor: theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.colors.gray[0] 
+                    backgroundColor: 
+                        theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.colors.gray[0] 
                 },
             })}
             navbarOffsetBreakpoint="sm"
