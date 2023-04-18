@@ -10,7 +10,7 @@ import {
     Button,
     ActionIcon
 } from "@mantine/core";
-import { IconDeviceFloppy } from '@tabler/icons-react';
+import { IconDeviceFloppy } from "@tabler/icons-react";
 
 export default function CollegeCard() {
     const [saved, setSaved] = useState(false);
@@ -120,7 +120,7 @@ export default function CollegeCard() {
                 my="md" 
                 ta="center"
             >
-                <Box w={{ sm: 200, lg: 300 }}>
+                <Box w={300}>
                     <Button 
                         fullWidth
                         component="a"
