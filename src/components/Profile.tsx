@@ -21,12 +21,12 @@ export default function Profile() {
                     Net price is what you pay after your gift aid is subtracted from the cost of attendance. Lower net prices can mean less student debt after graduation. Compare the average net prices of colleges to find your best fit.
                 </Text>
             </Container>
-            <SimpleGrid cols={2} spacing="lg" m="lg">
+{/*             <SimpleGrid cols={2} spacing="lg" m="lg">
                 <CollegeCard />
                 <CollegeCard />
                 <CollegeCard />
                 <CollegeCard />
-            </SimpleGrid>
+            </SimpleGrid> */}
         </>
     );
 };

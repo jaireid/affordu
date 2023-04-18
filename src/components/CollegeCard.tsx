@@ -12,7 +12,7 @@ import {
 } from "@mantine/core";
 import { IconDeviceFloppy } from "@tabler/icons-react";
 
-export default function CollegeCard() {
+export default function CollegeCard({ college }) {
     const [saved, setSaved] = useState(false);
 
     return (
@@ -20,11 +20,11 @@ export default function CollegeCard() {
             <Center>
                 <Text weight={500} size="xl" mb="md" ta="center">
                     <Anchor 
-                        href="https://www.rice.edu/" 
+                        href={college.url} 
                         target="_blank" 
                         underline={false}
                     >
-                        Rice University
+                        {college.name}
                     </Anchor>
                 </Text>
             </Center>
@@ -32,7 +32,7 @@ export default function CollegeCard() {
                 <Image 
                     width={75} 
                     height={75} 
-                    src="https://icons.duckduckgo.com/ip3/www.rice.edu.ico" 
+                    src={"https://icons.duckduckgo.com/ip3/" + college.url} 
                     alt=""
                 />
             </Center>
@@ -47,7 +47,7 @@ export default function CollegeCard() {
                         City, State
                     </Text>
                     <Text weight={500} size="sm">
-                        Houston, Texas
+                        {college.city}, {college.state}
                     </Text>
                 </div>
                 <div>
@@ -55,7 +55,7 @@ export default function CollegeCard() {
                         Student Size
                     </Text>
                     <Text weight={500} size="sm">
-                        4,300
+                        {college.size}
                     </Text>
                 </div>
                 <div>
@@ -63,7 +63,7 @@ export default function CollegeCard() {
                         Admission Rate
                     </Text>
                     <Text weight={500} size="sm">
-                        9%
+                        {college.admissionRate}%
                     </Text>
                 </div>
             </Group>
@@ -78,7 +78,7 @@ export default function CollegeCard() {
                         Cost of Attendence
                     </Text>
                     <Text weight={500} size="sm">
-                        71,745
+                        ${college.costAttendance}
                     </Text>
                 </div>
                 <div>
@@ -86,7 +86,7 @@ export default function CollegeCard() {
                         Net Price
                     </Text>
                     <Text weight={500} size="sm">
-                        16,076
+                        ${college.netPrice}
                     </Text>
                 </div>
                 <div>
@@ -94,7 +94,7 @@ export default function CollegeCard() {
                         Pell Grant Rate
                     </Text>
                     <Text weight={500} size="sm">
-                        70%
+                        {college.pellGrantRate}%
                     </Text>
                 </div>
                 <div>
@@ -102,7 +102,7 @@ export default function CollegeCard() {
                         Federal Loan Rate
                     </Text>
                     <Text weight={500} size="sm">
-                        30%
+                        {college.fedLoanRate}%
                     </Text>
                 </div>
                 <div>
@@ -110,7 +110,7 @@ export default function CollegeCard() {
                         Median Debt
                     </Text>
                     <Text weight={500} size="sm">
-                        12,000
+                        ${college.debt}
                     </Text>
                 </div>
             </Group>
@@ -125,7 +125,7 @@ export default function CollegeCard() {
                         fullWidth
                         component="a"
                         variant="outline" 
-                        href="https://www.rice.edu/" 
+                        href={college.calculator} 
                         target="_blank"
                     >
                         Net Price Calculator

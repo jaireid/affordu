@@ -1,5 +1,5 @@
 import { useState } from "react";
-import fetchColleges from "../api/collegeAPI";
+import { fetchColleges } from "../api/collegeAPI";
 import CollegeCard from "./CollegCard";
 import { Text, Box, TextInput, Button, Pagination, Loader } from "@mantine/core";
 

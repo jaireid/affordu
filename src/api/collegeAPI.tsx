@@ -27,7 +27,7 @@ export const fetchColleges = async (query: string, page: number, pageSize: numbe
                 "id,school.name,school.state,school.city,latest.admissions.admission_rate.overall,latest.student.size,latest.cost.attendance.academic_year,latest.cost.avg_net_price.overall,latest.aid.pell_grant_rate,latest.aid.federal_loan_rate,latest.aid.median_debt_suppressed.overall,latest.school.school_url,latest.school.price_calculator_url",
             per_page: pageSize.toString(),
             page: page.toString(),
-            school: query,
+            "school.name": query,
 });
       
         // Send a GET request to the API base URL with the query parameters
