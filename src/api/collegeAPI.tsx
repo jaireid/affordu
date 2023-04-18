@@ -20,9 +20,6 @@ type College = {
 const API_KEY = process.env.VITE_COLLEGE_API_KEY;
 const API_BASE_URL = `https://api.data.gov/ed/collegescorecard/v1/schools.json?api_key=${API_KEY}`;
 
-
-      
-
 export const fetchColleges = async (query: string, page: number, pageSize: number): Promise<College[]> => {
     try {
         const queryParams = new URLSearchParams({
