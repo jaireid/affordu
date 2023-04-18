@@ -1,9 +1,9 @@
 import { useState } from "react";
-import searchColleges from "../api/collegeAPI";
+import fetchColleges from "../api/collegeAPI";
 import CollegeCard from "./CollegCard";
 import { Text, Box, TextInput, Button, Pagination, Loader } from "@mantine/core";
 
-function SearchComponent({ searchColleges }) {
+function Search({ fetchColleges }) {
     const [query, setQuery] = useState("");
     const [colleges, setColleges] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -11,10 +11,11 @@ function SearchComponent({ searchColleges }) {
     const [pageSize, setPageSize] = useState(10);
     const [total, setTotal] = useState(0);
 
-    const handleSearch = async () => {
+    const handleSearch = async (e) => {
+        e.preventDefault();
         setLoading(true);
         setPage(1);
-        const result = await searchColleges(query, 1, pageSize);
+        const result = await fetchColleges(query, 1, pageSize);
         setColleges(result.colleges);
         setTotal(result.total);
         setLoading(false);
@@ -22,7 +23,7 @@ function SearchComponent({ searchColleges }) {
 
     const handlePageChange = async (newPage) => {
         setLoading(true);
-        const result = await searchColleges(query, newPage, pageSize);
+        const result = await fetchColleges(query, newPage, pageSize);
         setColleges(result.colleges);
         setPage(newPage);
         setLoading(false);
@@ -55,7 +56,7 @@ function SearchComponent({ searchColleges }) {
                         <CollegeCard key={college.id} college={college} />
                     ))}
                     <Pagination
-                        totalPages={Math.ceil(total / pageSize)}
+                        total={Math.ceil(total / pageSize)}
                         page={page}
                         onChange={handlePageChange}
                     />
