@@ -1,13 +1,9 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { createStyles, getStylesRef, rem, Navbar, Text, Button, Timeline, NavLink, ThemeIcon } from "@mantine/core";
+import { createStyles, getStylesRef, rem, Navbar, Text } from "@mantine/core";
 import { 
     IconListSearch, 
-    IconListCheck, 
-    IconChevronRight, 
-    IconInputSearch, 
-    IconSchool, 
-    IconCircleCheck, 
+    IconListCheck,  
     IconLogout 
 } from "@tabler/icons-react";
 

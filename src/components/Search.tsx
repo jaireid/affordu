@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { fetchColleges } from "../api/collegeAPI";
-import CollegeCard from "./CollegCard";
+import CollegeCard from "./CollegeCard";
 import { Text, Box, TextInput, Button, Pagination, Loader } from "@mantine/core";
 
 function Search({ fetchColleges }) {
@@ -32,7 +32,7 @@ function Search({ fetchColleges }) {
     return (
         <>
             <Box pb="lg" style={{ display: "flex", gap: "10px" }}>
-                <Box flexGrow={1}>
+                <Box>
                     <TextInput
                         placeholder="Search for colleges"
                         value={query}
@@ -57,7 +57,7 @@ function Search({ fetchColleges }) {
                     ))}
                     <Pagination
                         total={Math.ceil(total / pageSize)}
-                        page={page}
+                        value={page}
                         onChange={handlePageChange}
                     />
                 </>

@@ -2,7 +2,7 @@ import { MouseEvent } from "react";
 import { signInWithGoogle } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { Flex, Title, Text, Button, rem } from '@mantine/core';
+import { Flex, Title, Text, Button } from '@mantine/core';
 
 export default function Login() {
     const navigate = useNavigate();
