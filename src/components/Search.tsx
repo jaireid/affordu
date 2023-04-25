@@ -1,29 +1,57 @@
-import { useState } from "react";
-import { fetchColleges } from "../api/collegeAPI";
+import { useState, useEffect } from "react";
 import CollegeCard from "./CollegeCard";
-import { Text, Box, TextInput, Button, Pagination, Loader } from "@mantine/core";
+import { 
+    Text, 
+    Box, 
+    TextInput, 
+    Button, 
+    Pagination, 
+    Loader, 
+    SimpleGrid 
+} from "@mantine/core";
 
-function Search({ fetchColleges }) {
+export default function Search({ fetchColleges }) {
     const [query, setQuery] = useState("");
     const [colleges, setColleges] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [page, setPage] = useState(1);
-    const [pageSize, setPageSize] = useState(10);
+    const [page, setPage] = useState(0);
+    const [pageSize, setPageSize] = useState(20);
     const [total, setTotal] = useState(0);
+
+    // Display all colleges when the component mounts
+    useEffect(() => {
+        const fetchInitialColleges = async () => {
+            setLoading(true);
+            const result = await fetchColleges(query, page, pageSize);
+
+            setColleges(result.colleges);
+            setTotal(result.total);
+            setLoading(false);
+        };
+
+        fetchInitialColleges();
+    }, [query]);
 
     const handleSearch = async (e) => {
         e.preventDefault();
+
+        if (query.trim() === "") {
+            return;
+        }
+
         setLoading(true);
-        setPage(1);
-        const result = await fetchColleges(query, 1, pageSize);
+        setPage(0);
+        const result = await fetchColleges(query, 0, pageSize);
         setColleges(result.colleges);
+        console.log(result.colleges);
+        console.log(result.total);
         setTotal(result.total);
         setLoading(false);
     };
 
     const handlePageChange = async (newPage) => {
         setLoading(true);
-        const result = await fetchColleges(query, newPage, pageSize);
+        const result = await fetchColleges(query, newPage-1, pageSize);
         setColleges(result.colleges);
         setPage(newPage);
         setLoading(false);
@@ -47,19 +75,21 @@ function Search({ fetchColleges }) {
             </Box>
           
             {loading && <Loader />}
-            {!loading && colleges.length === 0 && (
+            {!loading && (!colleges || colleges.length === 0) && (
                 <Text>No colleges found</Text>
             )}
-            {!loading && colleges.length > 0 && (
+            {!loading && (!colleges || colleges.length > 0) && (
                 <>
-                    {colleges.map((college) => (
-                        <CollegeCard key={college.id} college={college} />
-                    ))}
+                    <SimpleGrid cols={2} spacing="lg" m="lg">
+                        {colleges?.map((college) => (
+                            <CollegeCard key={college.id} college={college} />
+                        ))}
+                    </SimpleGrid>
                     <Pagination
                         total={Math.ceil(total / pageSize)}
                         value={page}
                         onChange={handlePageChange}
-                    />
+                    />       
                 </>
             )}
         </>
