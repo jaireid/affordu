@@ -20,19 +20,23 @@ type College = {
 const API_KEY = process.env.VITE_COLLEGE_API_KEY;
 const API_BASE_URL = `https://api.data.gov/ed/collegescorecard/v1/schools.json?api_key=${API_KEY}`;
 
-export const fetchColleges = async (query: string, page: number, pageSize: number): Promise<College[]> => {
+export const fetchColleges = async (query: string, page: number, pageSize: number): Promise<{ colleges: College[], total: number }> => {
     try {
         const queryParams = new URLSearchParams({
             _fields: 
                 "id,school.name,school.state,school.city,latest.admissions.admission_rate.overall,latest.student.size,latest.cost.attendance.academic_year,latest.cost.avg_net_price.overall,latest.aid.pell_grant_rate,latest.aid.federal_loan_rate,latest.aid.median_debt_suppressed.overall,latest.school.school_url,latest.school.price_calculator_url",
             per_page: pageSize.toString(),
             page: page.toString(),
-            "school.name": query,
-});
+        });
+
+        if (query) {
+            queryParams.append("school.name", query);
+        }
       
         // Send a GET request to the API base URL with the query parameters
         const response = await axios.get(API_BASE_URL, { params: queryParams });
         const data = response.data;
+      
         // Map the returned data to an array
         const colleges = data.results.map((result: any): College => ({
             id: result.id,
@@ -50,10 +54,10 @@ export const fetchColleges = async (query: string, page: number, pageSize: numbe
             calculator: result["latest.school.price_calculator_url"],
         }));
 
-        return colleges;
+        return { colleges, total: data.metadata.total };
       
     } catch(error: AxiosError | any) {
         console.log(error.message);
-        return [];
+        return { colleges: [], total: 0 };
     }
 };
