@@ -92,7 +92,14 @@ export default function Search({ fetchColleges }) {
             )}
             {!loading && (!colleges || colleges.length > 0) && (
                 <>
-                    <SimpleGrid cols={2} spacing="lg" m="lg">
+                    <SimpleGrid 
+                        cols={2} 
+                        spacing="lg" 
+                        m="lg"
+                        breakpoints={[
+                            { maxWidth: 'md', cols: 1},
+                        ]}
+                    >
                         {colleges?.map((college) => (
                             <CollegeCard key={college.id} college={college} />
                         ))}

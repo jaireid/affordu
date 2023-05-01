@@ -34,10 +34,19 @@ export default function CollegeCard({ college }) {
 
     const url = college.url;
     const calculator = college.calculator;
-    const attend = (college.admissionRate * 100).toFixed(2);
-    const grant = (college.pellGrantRate * 100).toFixed(2);
-    const loan = (college.fedLoanRate * 100).toFixed(2);
 
+    const updateZeroValues = rate => {
+        if(rate == 0) {
+            return "N/A";
+        }
+
+        return (rate * 100).toFixed(2);
+    }
+  
+    const attend = college.admissionRate;
+    const grant = college.pellGrantRate;
+    const loan = college.fedLoanRate;
+  
     return (
         <Card shadow="sm" padding="lg" radius="md" withBorder>
             <Center>
@@ -86,7 +95,7 @@ export default function CollegeCard({ college }) {
                         Admission Rate
                     </Text>
                     <Text weight={500} size="sm">
-                        {attend ? attend + "%" : "N/A"}
+                        {attend ? updateZeroValues(attend) + "%" : "N/A"}
                     </Text>
                 </div>
             </Group>
@@ -117,7 +126,7 @@ export default function CollegeCard({ college }) {
                         Pell Grant Rate
                     </Text>
                     <Text weight={500} size="sm">
-                        {grant ? grant + "%" : "N/A"}
+                        {grant ? updateZeroValues(grant) + "%" : "N/A"}
                     </Text>
                 </div>
                 <div>
@@ -125,7 +134,7 @@ export default function CollegeCard({ college }) {
                         Federal Loan Rate
                     </Text>
                     <Text weight={500} size="sm">
-                        {loan ? loan + "%" : "N/A"}
+                        {loan ? updateZeroValues(loan) + "%" : "N/A"}
                     </Text>
                 </div>
                 <div>
