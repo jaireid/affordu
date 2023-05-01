@@ -1,10 +1,18 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { createStyles, getStylesRef, rem, Navbar, Text } from "@mantine/core";
+import { 
+    createStyles, 
+    getStylesRef, 
+    rem, 
+    Navbar, 
+    Text, 
+    Button, 
+    Center 
+} from "@mantine/core";
 import { 
     IconListSearch, 
     IconListCheck,  
-    IconLogout 
+    IconLogout
 } from "@tabler/icons-react";
 
 const useStyles = createStyles((theme) => ({
@@ -83,19 +91,37 @@ export default function Navi() {
   return (
       <>
         {currentUser ? (
-          <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 300, lg: 300 }}>
+          <Navbar 
+              p="md" 
+              hiddenBreakpoint="sm" 
+              hidden={!opened} 
+              width={{ sm: 300, lg: 300 }}
+          >
               <Navbar.Section grow mt="md">
-                  <Text weight={500} size="lg" color="dimmed" mb="xs" align="center">
-{/*                       Welcome, {currentUser?.displayName}! */}
+                  <Text 
+                      weight={500} 
+                      size="lg" 
+                      mb="xs" 
+                      align="center"
+                  >
+                      Welcome, {currentUser?.displayName}!
                           Welcome, User!
                   </Text>
                   {links}
               </Navbar.Section>
               <Navbar.Section>
-                  <a href="#" className={classes.link} onClick={signOut}>
-                        <IconLogout className={classes.linkIcon} stroke={1.5} />
-                        <span>Logout</span>
-                  </a>
+                  <Button 
+                      fullWidth
+                      leftIcon={
+                          <IconLogout 
+                              size="1.2rem"
+                              stroke={1.5}
+                          />
+                      }
+                      onClick={signOut}
+                  >
+                      <Text>Logout</Text>
+                  </Button>
               </Navbar.Section>
           </Navbar>
         ) : (

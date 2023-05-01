@@ -1,4 +1,5 @@
-import { MouseEvent } from "react";
+import { MouseEvent, useContext, useEffect } from "react";
+import { AuthContext } from '../context/AuthContext';
 import { signInWithGoogle } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
@@ -6,6 +7,14 @@ import { Flex, Title, Text, Button } from '@mantine/core';
 
 export default function Login() {
     const navigate = useNavigate();
+    const { currentUser } = useContext(AuthContext);
+
+    // Redirect to profile if user is already logged in
+    useEffect(() => {
+        if (currentUser) {
+            navigate("/profile");
+        }
+    }, [currentUser]);
   
     const handleGoogleLogin = async (event: MouseEvent<HTMLButtonElement>) => {
         // Prevent default button click behavior
