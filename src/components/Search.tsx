@@ -7,8 +7,12 @@ import {
     Button, 
     Pagination, 
     Loader, 
-    SimpleGrid 
+    SimpleGrid,
+    Container,
+    Center,
+    Alert
 } from "@mantine/core";
+import { IconAlertCircle } from '@tabler/icons-react';
 
 export default function Search({ fetchColleges }) {
     const [query, setQuery] = useState("");
@@ -59,24 +63,33 @@ export default function Search({ fetchColleges }) {
 
     return (
         <>
-            <Box pb="lg" style={{ display: "flex", gap: "10px" }}>
-                <Box>
-                    <TextInput
-                        placeholder="Search for colleges"
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                    />
-                </Box>
-                <Box>
-                    <Button onClick={handleSearch} disabled={loading}>
-                        Search
-                    </Button>
-                </Box>
-            </Box>
+            <Container 
+                size="xs"
+                p="md"
+                style={{ display: "flex", gap: "20px" }}
+            >
+                <TextInput 
+                    style={{ width: "400px" }}
+                    placeholder="Search for colleges"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                />
+                <Button onClick={handleSearch} disabled={loading}>
+                    Search
+                </Button>
+            </Container>
           
-            {loading && <Loader />}
+            {loading && <Center mt="100px"><Loader /></Center>}
             {!loading && (!colleges || colleges.length === 0) && (
-                <Text>No colleges found</Text>
+                <Center mt="100px">
+                     <Alert 
+                          icon={<IconAlertCircle size="1rem" />}
+                          title="Bummer!"
+                          style={{ width: "200px" }}
+                      >
+                          No Colleges Found
+                      </Alert>
+                </Center>
             )}
             {!loading && (!colleges || colleges.length > 0) && (
                 <>
@@ -86,6 +99,7 @@ export default function Search({ fetchColleges }) {
                         ))}
                     </SimpleGrid>
                     <Pagination
+                        mx="lg"
                         total={Math.ceil(total / pageSize)}
                         value={page}
                         onChange={handlePageChange}
