@@ -14,13 +14,28 @@ import { IconDeviceFloppy } from "@tabler/icons-react";
 
 export default function CollegeCard({ college }) {
     const [saved, setSaved] = useState(false);
+    const getClickableLink = link => {
+        if (!link) {
+            return null;
+        }
+
+        return link.startsWith("https://") ?
+            link
+            : `https://${link}`;
+    };
+
+    const url = college.url;
+    const calculator = college.calculator;
+    const attend = (college.admissionRate * 100).toFixed(2);
+    const grant = (college.pellGrantRate * 100).toFixed(2);
+    const loan = (college.fedLoanRate * 100).toFixed(2);
 
     return (
         <Card shadow="sm" padding="lg" radius="md" withBorder>
             <Center>
                 <Text weight={500} size="xl" mb="md" ta="center">
                     <Anchor 
-                        href={college.url} 
+                        href={getClickableLink(url)}
                         target="_blank" 
                         underline={false}
                     >
@@ -33,7 +48,7 @@ export default function CollegeCard({ college }) {
                     width={75} 
                     height={75} 
                     src={"https://icons.duckduckgo.com/ip3/" + college.url} 
-                    alt=""
+                    alt="College Logo"
                 />
             </Center>
             <Group 
@@ -47,7 +62,7 @@ export default function CollegeCard({ college }) {
                         City, State
                     </Text>
                     <Text weight={500} size="sm">
-                        {college.city}, {college.state}
+                        {college.city ? college.city : "N/A"}, {college.state ? college.state : "N/A"}
                     </Text>
                 </div>
                 <div>
@@ -55,7 +70,7 @@ export default function CollegeCard({ college }) {
                         Student Size
                     </Text>
                     <Text weight={500} size="sm">
-                        {college.size}
+                        {college.studentSize ? college.studentSize : "N/A"}
                     </Text>
                 </div>
                 <div>
@@ -63,7 +78,7 @@ export default function CollegeCard({ college }) {
                         Admission Rate
                     </Text>
                     <Text weight={500} size="sm">
-                        {college.admissionRate}%
+                        {attend ? attend + "%" : "N/A"}
                     </Text>
                 </div>
             </Group>
@@ -78,7 +93,7 @@ export default function CollegeCard({ college }) {
                         Cost of Attendence
                     </Text>
                     <Text weight={500} size="sm">
-                        ${college.costAttendance}
+                        {college.costAttendance ? "$" + college.costAttendance : "N/A"}
                     </Text>
                 </div>
                 <div>
@@ -86,7 +101,7 @@ export default function CollegeCard({ college }) {
                         Net Price
                     </Text>
                     <Text weight={500} size="sm">
-                        ${college.netPrice}
+                        {college.netPrice ? "$" + college.netPrice : "N/A"}
                     </Text>
                 </div>
                 <div>
@@ -94,7 +109,7 @@ export default function CollegeCard({ college }) {
                         Pell Grant Rate
                     </Text>
                     <Text weight={500} size="sm">
-                        {college.pellGrantRate}%
+                        {grant ? grant + "%" : "N/A"}
                     </Text>
                 </div>
                 <div>
@@ -102,7 +117,7 @@ export default function CollegeCard({ college }) {
                         Federal Loan Rate
                     </Text>
                     <Text weight={500} size="sm">
-                        {college.fedLoanRate}%
+                        {loan ? loan + "%" : "N/A"}
                     </Text>
                 </div>
                 <div>
@@ -110,7 +125,7 @@ export default function CollegeCard({ college }) {
                         Median Debt
                     </Text>
                     <Text weight={500} size="sm">
-                        ${college.debt}
+                        {college.debt ? "$" + college.debt : "N/A"}
                     </Text>
                 </div>
             </Group>
@@ -125,7 +140,7 @@ export default function CollegeCard({ college }) {
                         fullWidth
                         component="a"
                         variant="outline" 
-                        href={college.calculator} 
+                        href={getClickableLink(calculator)} 
                         target="_blank"
                     >
                         Net Price Calculator
