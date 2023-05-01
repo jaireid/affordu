@@ -27,7 +27,6 @@ export default function Search({ fetchColleges }) {
         const fetchInitialColleges = async () => {
             setLoading(true);
             const result = await fetchColleges(query, page, pageSize);
-
             setColleges(result.colleges);
             setTotal(result.total);
             setLoading(false);

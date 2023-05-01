@@ -24,6 +24,14 @@ export default function CollegeCard({ college }) {
             : `https://${link}`;
     };
 
+    const removeForwardSlash = link => {
+        if (!link) {
+            return null;
+        }
+
+        return link.slice(0, -1);
+    }
+
     const url = college.url;
     const calculator = college.calculator;
     const attend = (college.admissionRate * 100).toFixed(2);
@@ -45,9 +53,9 @@ export default function CollegeCard({ college }) {
             </Center>
             <Center>
                 <Image 
-                    width={75} 
-                    height={75} 
-                    src={"https://icons.duckduckgo.com/ip3/" + college.url} 
+                    width={64} 
+                    height={64}
+                    src={`https://www.google.com/s2/favicons?domain=${removeForwardSlash(url)}&sz=${64}`}
                     alt="College Logo"
                 />
             </Center>
