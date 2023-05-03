@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import { AuthContext } from "../context/AuthContext";
 import { 
     Card, 
     Image, 
@@ -11,9 +12,93 @@ import {
     ActionIcon
 } from "@mantine/core";
 import { IconDeviceFloppy } from "@tabler/icons-react";
+import { db } from "../utils/firebase";
+import { doc, setDoc, deleteDoc } from "firebase/firestore";
 
 export default function CollegeCard({ college }) {
-    const [saved, setSaved] = useState(false);
+    const { currentUser } = useContext(AuthContext);
+    const userId = (currentUser.uid).toString();
+    const collegeId = (college.id).toString();
+    // Set the default value of clicked to false
+    const [clicked, setClicked] = useState(false);
+
+    useEffect(() => {
+        // Initialize save state with the saved college data from localStorage or an empty object
+        const userSaveState = JSON.parse(localStorage.getItem("userSaveState")) || {};
+        // Grab clicked value
+        const save = userSaveState[collegeId];
+
+        // If clicked's value is true setClicked
+        if (save) {
+            setClicked(JSON.parse(save));
+        }
+    }, [collegeId]);
+
+   
+    useEffect(() => {
+        // Initialize save state with the saved college data from localStorage or an empty object
+        const userSaveState = JSON.parse(localStorage.getItem("userSaveState")) || {};
+
+         // If clicked is true update the clicked value for the college
+        if (clicked) {
+            userSaveState[collegeId] = clicked;
+        } else {
+            // If not delete the college
+            delete userSaveState[collegeId];
+        }
+
+        // Add the save state to localStorage
+        localStorage.setItem("userSaveState", JSON.stringify(userSaveState));
+    }, [clicked, collegeId]);
+
+    const handleSave = () => {
+        if(clicked) {
+            deleteCollegeDocument();
+            setClicked(false);
+        } else {
+            addCollegeDocument();
+            setClicked(true);
+        }
+    };
+
+    const addCollegeDocument = async () => {
+        
+        try {
+            if (!currentUser) throw new Error("User not authenticated");
+            
+            await setDoc(doc(db, "colleges", collegeId), {
+                admissionRate: college.admissionRate,
+                calculator: college.calculator,
+                city: college.city,
+                costAttendance: college.costAttendance,
+                debt: college.debt,
+                fedLoanRate: college.fedLoanRate,
+                name: college.name,
+                netPrice: college.netPrice,
+                pellGrantRate: college.pellGrantRate,
+                state: college.state,
+                studentSize: college.studentSize,
+                url: college.url,
+                addedBy: userId,
+            });
+          
+            console.log("Document written with ID: ", collegeId);
+        } catch (error) {
+            console.error("Error adding document: ", error);
+        }
+    };
+
+    const deleteCollegeDocument = async () => {
+      try  {
+          if (!currentUser) throw new Error("User not authenticated");
+        
+          await deleteDoc(doc(db, "colleges", collegeId));
+          console.log("Document deleted");
+      } catch(error) {
+          console.error("Error deleting document: ", error);
+      }
+    };
+    
     const getClickableLink = link => {
         if (!link) {
             return null;
@@ -164,11 +249,11 @@ export default function CollegeCard({ college }) {
                     </Button>
                 </Box>
                 <ActionIcon 
-                    variant={saved ? "filled" : "outline"}
+                    variant={clicked ? "filled" : "outline"}
                     color="blue" 
                     radius="md" 
                     size={36}
-                    onClick={() => setSaved(!saved)}
+                    onClick={handleSave}
                 >
                     <IconDeviceFloppy size="1.1rem" stroke={1.5} />
                 </ActionIcon>

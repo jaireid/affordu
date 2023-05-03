@@ -123,25 +123,23 @@ export default function Search({ fetchColleges }) {
 
     return (
         <>
-            <Center>
-                <Container 
-                    size="lg"
-                    p="md"
-                    style={{ display: "flex", gap: "20px" }}
-                >
-                    <TextInput 
-                        style={{ width: "400px" }}
-                        placeholder="Search for colleges..."
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                    />
-                    <Button 
-                        onClick={handleSearch} 
-                        disabled={loading}>
-                        Search
-                    </Button>
-                </Container>
-            </Center>
+            <Container 
+                size="xs"
+                p="lg"
+                style={{ display: "flex", gap: "20px" }}
+            >
+                <TextInput 
+                    style={{ width: "400px" }}
+                    placeholder="Search for colleges..."
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                />
+                <Button 
+                    onClick={handleSearch} 
+                    disabled={loading}>
+                    Search
+                </Button>
+            </Container>
             
             <Group 
                 spacing="lg"
