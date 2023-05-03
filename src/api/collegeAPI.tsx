@@ -18,7 +18,7 @@ type College = {
 
 // Build the API base URL using the API key
 const API_KEY = process.env.VITE_COLLEGE_API_KEY;
-const API_BASE_URL = `https://api.data.gov/ed/collegescorecard/v1/schools.json?api_key=${API_KEY}&latest.cost.avg_net_price.overall__not=nul&sort=school.name`;
+const API_BASE_URL = `https://api.data.gov/ed/collegescorecard/v1/schools.json?api_key=${API_KEY}&latest.cost.avg_net_price.overall__not=null&sort=school.name`;
 
 export const fetchColleges = async (
     query: string, 
