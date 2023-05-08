@@ -1,6 +1,4 @@
-## AffordU
-
-## Project setup
+## AffordU Project setup
 ```
 npm install
 ```
