@@ -7,7 +7,6 @@ import {
     Anchor,
     rem
 } from "@mantine/core";
-import { IconAlertCircle } from "@tabler/icons-react";
 import { db } from "../utils/firebase";
 import { collection, query, where, getDocs } from "firebase/firestore";
 
@@ -47,7 +46,7 @@ export default function SavedColleges() {
 
     const getData = async () => {
         try {
-            const q = query(collection(db, "colleges"), where("addedBy", "==", userId));
+            const q = query(collection(db, "users", userId, "colleges"));
             const querySnapshot = await getDocs(q);
 
             const data = querySnapshot.docs

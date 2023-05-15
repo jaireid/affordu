@@ -65,24 +65,16 @@ export default function CollegeCard({ college }) {
         
         try {
             if (!currentUser) throw new Error("User not authenticated");
-            
-            await setDoc(doc(db, "colleges", collegeId), {
-                admissionRate: college.admissionRate,
+
+            await setDoc(doc(db, "users", userId, "colleges", collegeId), {
                 calculator: college.calculator,
                 city: college.city,
-                costAttendance: college.costAttendance,
-                debt: college.debt,
-                fedLoanRate: college.fedLoanRate,
                 name: college.name,
                 netPrice: college.netPrice,
-                pellGrantRate: college.pellGrantRate,
+                saved: true,
                 state: college.state,
-                studentSize: college.studentSize,
                 url: college.url,
-                addedBy: userId,
             });
-          
-            console.log("Document written with ID: ", collegeId);
         } catch (error) {
             console.error("Error adding document: ", error);
         }
@@ -92,8 +84,7 @@ export default function CollegeCard({ college }) {
       try  {
           if (!currentUser) throw new Error("User not authenticated");
         
-          await deleteDoc(doc(db, "colleges", collegeId));
-          console.log("Document deleted");
+          await deleteDoc(doc(db, "users", userId, "colleges", collegeId));
       } catch(error) {
           console.error("Error deleting document: ", error);
       }
