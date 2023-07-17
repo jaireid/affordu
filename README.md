@@ -6,7 +6,7 @@ A responsive application enabling users to search, filter, compare, and save col
 
 ![Screenshot preview for the Intro component with sign up form coding challenge](./public/screenshot.PNG)
 
-### Built with
+### Built with:
 
 - TypeScript
 - React using Vite
