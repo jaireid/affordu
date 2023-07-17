@@ -14,7 +14,7 @@ A responsive application enabling users to search, filter, compare, and save col
 - Mantine
 - Axios
 
-### It includes the following
+### It includes the following:
 
 - College Scorecard API integration with Axios
 - Authentication with Firebase's GoogleAuthProvider
