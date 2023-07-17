@@ -1,4 +1,4 @@
-# Frontend Mentor - Intro component with sign up form solution
+# AffordU
 
 A responsive application enabling users to search, filter, compare, and save colleges based on average net price.
 
@@ -14,13 +14,13 @@ A responsive application enabling users to search, filter, compare, and save col
 - Mantine
 - Axios
 
-### It includes the following:
+### It includes the following
 
 - College Scorecard API integration with Axios
 - Authentication with Firebase's GoogleAuthProvider
 - Firestore database where users and saved colleges are stored
 
-## Install Dependencies
+### Install Dependencies
 
 npm install
 
