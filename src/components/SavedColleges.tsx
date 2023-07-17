@@ -51,7 +51,7 @@ export default function SavedColleges() {
 
             const data = querySnapshot.docs
                 .map((doc) => ({ 
-                    id: doc.id, ...doc.data() 
+                    id: doc.id, ...doc.data()
                 }));
           
             setCollegeData(data);
