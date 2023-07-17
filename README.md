@@ -1,4 +1,4 @@
-# Frontend Mentor - Intro component with sign up form solution
+# AffordU
 
 A responsive application enabling users to search, filter, compare, and save colleges based on average net price.
 
