@@ -1,19 +1,26 @@
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { 
-    Card, 
-    Image, 
-    Text, 
-    Group, 
-    Center, 
-    Anchor, 
-    Box, 
-    Button,
-    ActionIcon
+import {
+  Card,
+  Image,
+  Text,
+  Group,
+  Center,
+  Anchor,
+  Box,
+  Button,
+  ActionIcon,
 } from "@mantine/core";
 import { IconDeviceFloppy } from "@tabler/icons-react";
 import { db } from "../utils/firebase";
-import { doc, collection, query, getDocs, setDoc, deleteDoc } from "firebase/firestore";
+import {
+  doc,
+  collection,
+  query,
+  getDocs,
+  setDoc,
+  deleteDoc,
+} from "firebase/firestore";
 
 export default function CollegeCard({ college }) {
   const { currentUser } = useContext(AuthContext);
@@ -75,7 +82,6 @@ export default function CollegeCard({ college }) {
     try {
       if (!currentUser) throw new Error("User not authenticated");
 
-
       if (isCollegeSaved) {
         // College is already saved, remove it from the saved colleges
         await deleteCollegeDocument();
@@ -91,7 +97,7 @@ export default function CollegeCard({ college }) {
         ]);
       }
     } catch (error) {
-        console.error("Error saving/deleting college: ", error);
+      console.error("Error saving/deleting college: ", error);
     }
   };
 
@@ -242,4 +248,4 @@ export default function CollegeCard({ college }) {
       </Group>
     </Card>
   );
-};
+}
