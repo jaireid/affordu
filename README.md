@@ -1,8 +1,8 @@
 # AffordU
 
-A responsive application enabling users to search, filter, compare, and save colleges based on average net price.
+A responsive application enabling users to search, save, and filter colleges by average net price.
 
-![Screenshot preview for the Intro component with sign up form coding challenge](./public/screenshot.PNG)
+![Screenshot preview for search colleges screen](./public/screenshot.PNG)
 
 ### Built with:
 
@@ -16,7 +16,7 @@ A responsive application enabling users to search, filter, compare, and save col
 
 - College Scorecard API integration with Axios
 - Authentication with Firebase's GoogleAuthProvider
-- Firestore database where users and saved colleges are stored
+- Firestore database to store user data and saved colleges
 
 ## Usage
 
